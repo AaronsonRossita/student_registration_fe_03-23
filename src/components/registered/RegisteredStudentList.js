@@ -4,12 +4,13 @@ import RegisteredStudent from "./RegisteredStudent";
 
 function RegisteredStudentList(props){
 
+    //console.log(props.courses)
+
     return(
         <ul className="registrations-list">
             {props.students.map( (student, index) => {
                 return(
-                    // <RegisteredStudent student={student} course={props.courses[student.course]} key={index}/>
-                    <li>{student.first_name}</li>
+                    <RegisteredStudent student={student} course={props.course} key={index}/>
                 )
             })}
         </ul>

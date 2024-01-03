@@ -14,7 +14,7 @@ function RegisteredStudentFilter(props){
                 <select onChange={handleSelect}>
                     {props.courses.map( (course, index) => {
                         return(
-                            <option value={course.id} key={index}>{course.name}</option>
+                            <option value={course.id} key={index}>{course.name.toUpperCase()}</option>
                         )
                     })}
                 </select>

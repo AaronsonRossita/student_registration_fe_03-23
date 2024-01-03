@@ -5,23 +5,26 @@ import RegisteredStudentFilter from "./RegisteredStudentFilter";
 
 function Registration(props){
 
-    console.log("from registration")
-    console.log(props.students)
 
-    const [filteredCourse, setFilteresCourse] = useState(props.courses[0]);
+    const [filteredCourse, setFilteresCourse] = useState(1);
+    const [selectedCourse, setSelectedCourse] = useState(props.courses[0]);
 
     const filteredStudentList = props.students.filter( (student) => {
-        return student.course_id === filteredCourse;
+        return student.course_id == filteredCourse;
     })
 
-    const handleFilter = (course) => {
-        setFilteresCourse(course)
+
+    const handleFilter = (courseId) => {
+        setFilteresCourse(courseId)
+        setSelectedCourse(props.courses.filter( (course) => {
+            return course.id ==  courseId
+        })[0])    
     }
 
     return(
         <div className="registrations card">
             <RegisteredStudentFilter courses={props.courses} onChangeFilter={handleFilter}/>
-            <RegisteredStudentList students={filteredStudentList} courses={props.courses}/>
+            <RegisteredStudentList students={filteredStudentList} course={selectedCourse}/>
         </div>
     )
 }

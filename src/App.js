@@ -11,20 +11,32 @@ function App() {
   const [courses, setCourses] = useState([]);
   const [students, setStudents] = useState([]);
 
+
   useEffect( () => {
-    getAllCourses()
-      .then(res => setCourses(res.data))
-      .catch(err => alert(err.message))
-    getAllStudents()
-      .then(res => {
-        setStudents(res.data);
-      })
-      .catch(err => alert(err.message))
+    // getAllCourses()
+    //   .then(res => setCourses(res.data))
+    //   .catch(err => alert(err.message))
+    // getAllStudents()
+    //   .then(res => {
+    //     setStudents(res.data);
+    //   })
+    //   .catch(err => alert(err.message))
+    const fetchStudentsAndCourses = async () => {
+      try{
+        const courses = await getAllCourses();
+        const students = await getAllStudents();
+        setCourses(courses.data);
+        setStudents(students.data);
+      }catch(err){
+        console.log(err);
+      }
+    }
+    fetchStudentsAndCourses()
   },[])
 
   const handleStudentRegistration = (student) => {
     createStudent(student)
-      .then(res => alert("Student with id " + res.data + " was created"))
+      .then(res => console.log("Student with id " + res.data + " was created"))
       .catch(err => alert(err.message))
   }
 
